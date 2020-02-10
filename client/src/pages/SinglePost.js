@@ -14,6 +14,7 @@ import {
 
 import { AuthContext } from '../context/auth';
 import LikeButton from '../components/LikeButton';
+import UnLikeButton from '../components/UnLikeButton';
 import DeleteButton from '../components/DeleteButton';
 import MyPopup from '../util/MyPopup';
 
@@ -58,7 +59,9 @@ function SinglePost(props) {
       username,
       comments,
       likes,
+      unlikes,
       likeCount,
+      unlikeCount,
       commentCount
     } = getPost;
 
@@ -82,6 +85,7 @@ function SinglePost(props) {
               <hr />
               <Card.Content extra>
                 <LikeButton user={user} post={{ id, likeCount, likes }} />
+                <UnLikeButton user={user} post={{ id, unlikeCount, unlikes}} />
                 <MyPopup content="Comment on post">
                   <Button
                     as="div"
@@ -128,6 +132,7 @@ function SinglePost(props) {
                 </Card.Content>
               </Card>
             )}
+            <h1>Cavablar</h1>
             {comments.map((comment) => (
               <Card fluid key={comment.id}>
                 <Card.Content>
@@ -137,6 +142,10 @@ function SinglePost(props) {
                   <Card.Header>{comment.username}</Card.Header>
                   <Card.Meta>{moment(comment.createdAt).fromNow()}</Card.Meta>
                   <Card.Description>{comment.body}</Card.Description>
+                  <hr />
+                  <LikeButton user={user} post={{ id, likeCount, likes }} />
+                  <UnLikeButton user={user} post={{ id, unlikeCount, unlikes}} />
+                  
                 </Card.Content>
               </Card>
             ))}
@@ -171,7 +180,11 @@ const FETCH_POST_QUERY = gql`
       createdAt
       username
       likeCount
+      unlikeCount
       likes {
+        username
+      }
+      unlikes {
         username
       }
       commentCount

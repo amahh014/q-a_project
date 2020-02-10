@@ -37,7 +37,7 @@ function UnLikeButton({ user, post: { id, unlikeCount, unlikes } }) {
 
   return (
     <Button as="div" labelPosition="right" onClick={unlikePost}>
-      <MyPopup content={unliked ? 'Unlike' : 'Like'}>{unlikeButton}</MyPopup>
+      <MyPopup content={unliked ? 'Like' : 'Unlike'}>{unlikeButton}</MyPopup>
       <Label basic color="teal" pointing="left">
         {unlikeCount}
       </Label>
